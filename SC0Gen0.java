@@ -71,7 +71,9 @@ class SC0Gen {
   static List<String> gen(Ast0.Block n) throws Exception {
     List<String> code;
 
-    //  ... NEED CODE ...
+    for(Ast1.Stmt s: stmts) {
+      code.addAll(gen(s));
+    }
 
     return code;
   }
@@ -80,10 +82,22 @@ class SC0Gen {
   // Ast0.Id lhs;
   // Ast0.Exp rhs;
   //
+  // Assign x 1:
+  //
   static List<String> gen(Ast0.Assign n) throws Exception {
     List<String> code;
+    
+    String varId = n.lhs.nm;
 
-    //  ... NEED CODE ...
+
+    if(!vars.contains(varId) {
+      vars.add(varId)'
+      vars.indexOf(varId)
+      
+    }
+      
+
+
 
     return code;
   }
