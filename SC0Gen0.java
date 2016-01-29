@@ -118,6 +118,8 @@ class SC0Gen {
   //
   static List<String> gen(Ast0.While n) throws Exception {
     List<String> code;
+    
+
 
     //  ... NEED CODE ...
 
@@ -128,9 +130,9 @@ class SC0Gen {
   // Ast0.Exp arg;
   //
   static List<String> gen(Ast0.Print n) throws Exception {
-    List<String> code;
+    List<String> code = gen(n.arg);
 
-    //  ... NEED CODE ...
+    code.add("PRINT");
 
     return code;
   }
@@ -188,14 +190,20 @@ class SC0Gen {
   // Ast0.Exp e;
   //
   static List<String> gen(Ast0.Unop n) throws Exception {
-    List<String> code;
-
-    code.gen(n.e);
+    List<String> code = gen(n.e);
     
-    if (n.op != NOT) {
-      code.add(
-
-    //  ... NEED CODE ...
+    // If zero, jump 3 which will change it to 1
+    // otherwise just go to next, to set to zero
+    // and jump over the 1
+    if(n.op == Ast1.UOP.NOT) {
+      code.add("IFZ +3");
+      code.add("CONST 0");
+      code.add("GOTO +2");
+      code.add("CONST 1");
+    }
+    else {
+      code.add("NEG");
+    }
 
     return code;
   }
@@ -222,7 +230,7 @@ class SC0Gen {
     List<String> code;
 
     // Probably something along the lines of adding a ("CONST codePack.src)
-    //  ... NEED CODE ...
+    code.add("CONST " + n.i);
 
     return code;
   }
@@ -232,8 +240,12 @@ class SC0Gen {
   //
   static List<String> gen(Ast0.BoolLit n) {
     List<String> code;
+    
+    if(n.op)
+      code.add("CONST 1");
+    else
+      code.add("CONST 0");
 
-    //  ... NEED CODE ...
 
     return code;
   }
