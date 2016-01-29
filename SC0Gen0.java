@@ -117,11 +117,12 @@ class SC0Gen {
   // Ast0.Stmt s;
   //
   static List<String> gen(Ast0.While n) throws Exception {
-    List<String> code;
-    
+    List<String> code = gen(n.cond);
+    List<String> sCode = gen(n.s);
 
-
-    //  ... NEED CODE ...
+    code.add("IFZ +" + (sCode.size() + 1);
+    code.addAll(sCode);
+    code.add("GOTO -" + (code.size() + 1));
 
     return code;
   }
