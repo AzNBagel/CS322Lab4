@@ -1,0 +1,7 @@
+# AST0 Program
+Assign b false
+If (Binop || true b) 
+ Assign x 1 
+Else
+ Assign x 2 
+Print x

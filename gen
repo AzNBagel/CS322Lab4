@@ -1,0 +1,33 @@
+#!/bin/sh
+
+# Script for running miniJava compiler tests. 
+# (For CS321/CS322 Language and Compiler Design, Portland State University.)
+#
+# Usage:
+#   ./gen tst/test01.ast  -- test a single program 
+#   ./gen tst/test*.ast   -- test all programs
+#
+# The script will compare your IR0Gen's output with a ref file (if exists),
+# and save the diffs in a .diff file.
+#
+
+for i
+do
+	d=`dirname $i`
+	f=`basename $i .ast`
+        echo -n "$d/$f: "
+	java SC0Gen $d/$f.ast 1> $d/$f.sc
+	if [ -r $d/$f.sc.ref ]; then
+          diff -w $d/$f.sc $d/$f.sc.ref > $d/$f.sc.diff; 
+          if [ -s $d/$f.sc.diff ]; then 
+            echo "differs from ref (see $f.sc.diff)"; 
+          else 
+            echo "matches ref"; 
+            rm $d/$f.sc.diff;
+          fi
+	else
+            echo "no ref to compare"; 
+        fi
+done
+exit 0
+

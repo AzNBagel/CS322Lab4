@@ -1,0 +1,8 @@
+# AST0 Program
+Assign a 0
+Assign b 0
+If (Binop || (Binop > a 0) (Binop > b 0))
+ Assign x 1 
+Else
+ Assign x 2 
+Print x

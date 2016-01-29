@@ -1,0 +1,5 @@
+# AST0 Program
+If (Binop > 3 0) 
+ Assign x 1 
+Print x
+

@@ -1,0 +1,6 @@
+# AST0 Program
+Assign i (Binop - (Binop + 2 (Binop * 2 4)) (Binop / 9 3))
+If (Binop || (Binop > 1 2) (Binop && (Binop < 3 4) (Unop ! false)))
+ Print i
+Else
+ Print (Binop - i 1)

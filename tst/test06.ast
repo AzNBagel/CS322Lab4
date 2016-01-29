@@ -1,0 +1,5 @@
+# AST0 Program
+Assign x (Binop || (Binop > 1 0) (Binop > 1 2))
+Assign y (Binop * (Binop + 1 2) (Binop - 3 1))
+Print x
+Print y

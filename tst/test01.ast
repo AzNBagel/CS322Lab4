@@ -1,0 +1,4 @@
+# AST0 Program
+Assign x (Binop + 1 (Binop * 2 4))
+Assign y (Binop + (Unop - 5) 2)
+Print (Binop - x y)

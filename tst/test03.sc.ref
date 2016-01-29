@@ -1,0 +1,13 @@
+# Stack Code (SC0)
+
+0. CONST 3
+1. CONST 0
+2. IFGT +3
+3. CONST 0
+4. GOTO +2
+5. CONST 1
+6. IFZ +3
+7. CONST 1
+8. STORE 0
+9. LOAD 0
+10. PRINT

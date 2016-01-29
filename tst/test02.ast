@@ -1,0 +1,4 @@
+# AST0 Program
+Assign x (Binop || (Binop < 2 4) (Binop == 3 5))
+Assign y (Binop == (Unop ! true) false)
+Print (Binop == x y)
