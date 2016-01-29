@@ -1,0 +1,32 @@
+#!/bin/sh
+
+# Script for running miniJava compiler tests. 
+# (For CS321/CS322 Language and Compiler Design, Portland State University.)
+#
+# Usage:
+#   ./run tst/test01.sc  -- test a single program 
+#   ./run tst/test*.sc   -- test all programs
+#
+# The script will compare the SC0Interp's output with a ref file (if exists),
+# and save the diffs in a .diff file.
+#
+
+for i
+do
+	d=`dirname $i`
+	f=`basename $i .sc`
+	echo -n "$d/$f: "
+	java -jar SC0Interp.jar $d/$f.sc 1> $d/$f.out
+	if [ -r $d/$f.out.ref ]; then
+          diff -w $d/$f.out $d/$f.out.ref > $d/$f.out.diff; 
+          if [ -s $d/$f.out.diff ]; then 
+            echo "differs from ref (see $f.out.diff)"; 
+          else
+            echo "matches ref"; 
+            rm $d/$f.out $d/$f.out.diff;
+          fi
+	else
+            echo "no ref to compare"; 
+        fi
+done
+exit 0
