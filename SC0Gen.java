@@ -82,20 +82,26 @@ class SC0Gen {
   // Ast0.Id lhs;
   // Ast0.Exp rhs;
   //
-  // Assign x 1:
+  // Assign x 1
+  // Assign y x
+  //        CONST 1
+  //        STORE 0 # Store x (x's index is 0)
+  //        LOAD 0  # Load x
+  //        STORE 1 # Store y ( y's index is 1)
+  //
   //
   static List<String> gen(Ast0.Assign n) throws Exception {
-    List<String> code;
+    List<String> code = gen(n.rhs);
     
     String varId = n.lhs.nm;
 
-
-    if(!vars.contains(varId) {
-      vars.add(varId)'
-      vars.indexOf(varId)
-      
+    if(!vars.contains(varId)) {
+      vars.add(varId);
+      code.add("STORE " + vars.indexOf(varId));
     }
-      
+    else {
+      code.add("STORE " + vars.indexOf(varId));
+    }
 
 
 
