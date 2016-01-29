@@ -62,16 +62,19 @@ class SC0Gen {
     if (n instanceof Ast0.Block)       return gen((Ast0.Block) n);
     else if (n instanceof Ast0.Assign) return gen((Ast0.Assign) n);
     else if (n instanceof Ast0.If)     return gen((Ast0.If) n);
-    else if (n instanceof Ast0.While)  return gen((Ast0.While) n)
+    else if (n instanceof Ast0.While)  return gen((Ast0.While) n);
+    else if (n instanceof Ast0.Print)  return gen((Ast0.Print) n);
+    throw new GenException("Unknown Ast0 Stmt: " + n);
+  }
   
 
   // Ast0.Block ---
   // Ast0.Stmt[] stmts;
   //
   static List<String> gen(Ast0.Block n) throws Exception {
-    List<String> code;
+    List<String> code = new ArrayList<String>();
 
-    for(Ast1.Stmt s: stmts) {
+    for(Ast0.Stmt s: n.stmts) {
       code.addAll(gen(s));
     }
 
@@ -102,8 +105,6 @@ class SC0Gen {
     else {
       code.add("STORE " + vars.indexOf(varId));
     }
-
-
 
     return code;
   }
@@ -140,7 +141,7 @@ class SC0Gen {
     List<String> code = gen(n.cond);
     List<String> sCode = gen(n.s);
 
-    code.add("IFZ +" + (sCode.size() + 1);
+    code.add("IFZ +" + (sCode.size() + 1));
     code.addAll(sCode);
     code.add("GOTO -" + (code.size() + 1));
 
@@ -216,7 +217,7 @@ class SC0Gen {
     // If zero, jump 3 which will change it to 1
     // otherwise just go to next, to set to zero
     // and jump over the 1
-    if(n.op == Ast1.UOP.NOT) {
+    if(n.op == Ast0.UOP.NOT) {
       code.add("IFZ +3");
       code.add("CONST 0");
       code.add("GOTO +2");
@@ -248,7 +249,7 @@ class SC0Gen {
   // int i;
   //
   static List<String> gen(Ast0.IntLit n) throws Exception {
-    List<String> code;
+    List<String> code = new ArrayList<String>(); 
 
     // Probably something along the lines of adding a ("CONST codePack.src)
     code.add("CONST " + n.i);
@@ -260,9 +261,9 @@ class SC0Gen {
   // boolean b;
   //
   static List<String> gen(Ast0.BoolLit n) {
-    List<String> code;
+    List<String> code = new ArrayList<String>();
     
-    if(n.op)
+    if(n.b)
       code.add("CONST 1");
     else
       code.add("CONST 0");
